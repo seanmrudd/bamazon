@@ -1,7 +1,9 @@
-var inquirer = require('inquirer');
-var mysql = require('mysql');
+const inquirer = require('inquirer');
+const mysql = require('mysql');
+const chalk = require('chalk');
+
 var seperator = '---------------------------------------------------------------------------\n'
-var tableHeader = `${seperator}| ID    | Product Name              | Department      | Price   |Quantitiy|`
+var tableHeader = `${seperator}| ID    | Product Name              | Department      | Price   |Quantitiy|\n---------------------------------------------------------------------------`
 
 var connection = mysql.createConnection({
   host: 'localhost',
@@ -20,7 +22,7 @@ connection.connect(function (err) {
 function displayProducts() {
   connection.query('SELECT * FROM products', function (err, res) {
     if (err) throw err;
-    console.log(tableHeader);
+    console.log(`${chalk.blue(tableHeader)}`);
     for (let i = 0; i < res.length; i++) {
       var idFixed = res[i].item_id;
       var productNameFixed = res[i].product_name;
@@ -54,7 +56,7 @@ function purchaseInquiry() {
       var amount = answers.amount;
       var amount2 = parseInt(amount);
 
-      connection.query('SELECT * FROM products WHERE `item_id` = ' + item2, function (err, res) {
+      connection.query('SELECT * FROM products WHERE ?', item2, function (err, res) {
         if (err) throw err;
 
         // console.log(`Item id: ${item2} \nAmount purchased: ${amount2}`)
