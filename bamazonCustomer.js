@@ -29,7 +29,7 @@ function displayProducts() {
       var departmentNameFixed = res[i].department_name;
       var priceFixed = res[i].price;
       var stockQuantitiyFixed = res[i].stock_quantity;
-      console.log(`${seperator}| ${idFixed.toString().padEnd(5).substr(0,5)} | ${productNameFixed.padEnd(25).substr(0,25)} | ${departmentNameFixed.padEnd(15).substr(0,15)} | ${priceFixed.toString().padEnd(7).substr(0,7)} | ${stockQuantitiyFixed.toString().padEnd(7).substr(0,7)} |`);
+      console.log(`${seperator}| ${idFixed.toString().padEnd(5).substr(0, 5)} | ${productNameFixed.padEnd(25).substr(0, 25)} | ${departmentNameFixed.padEnd(15).substr(0, 15)} | ${priceFixed.toString().padEnd(7).substr(0, 7)} | ${stockQuantitiyFixed.toString().padEnd(7).substr(0, 7)} |`);
     }
     console.log(seperator);
     purchaseInquiry();
@@ -56,7 +56,7 @@ function purchaseInquiry() {
       var amount = answers.amount;
       var amount2 = parseInt(amount);
 
-      connection.query('SELECT * FROM products WHERE ?', item2, function (err, res) {
+      connection.query('SELECT * FROM products WHERE `item_id` = ' + item2, function (err, res) {
         if (err) throw err;
 
         // console.log(`Item id: ${item2} \nAmount purchased: ${amount2}`)
@@ -75,9 +75,29 @@ function purchaseInquiry() {
             ]
           )
           // console.log(query.sql);
-          console.log(`\nYour total comes to $${(res[0].price*amount2).toFixed(2)}.`)
+          console.log(`\nYour total comes to $${(res[0].price * amount2).toFixed(2)}.`)
         } else console.log('Not enought in stock.');
-        connection.end();
+        continueShopping();
       })
+    })
+}
+
+function continueShopping() {
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        name: 'shop',
+        message: 'Would you like to continue shopping?',
+        choices: ['Yes', 'No']
+      }
+    ])
+    .then (function(answers){
+      if (answers.shop === 'Yes'){
+        displayProducts();
+      } else {
+        connection.end();
+        process.exit();
+      }
     })
 }
