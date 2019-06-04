@@ -31,3 +31,9 @@ INSERT INTO products(product_name, department_name, price, stock_quantity) VALUE
 INSERT INTO products(product_name, department_name, price, stock_quantity) VALUES ('Luvs Diapers', 'Infant/Toddler', 29.99, 75);
 
 INSERT INTO products(product_name, department_name, price, stock_quantity) VALUES ('Holy Grail', 'Divine Item', 999.99, 99);
+
+CREATE TABLE departments (
+	department_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    department_name VARCHAR(100),
+    over_head_costs INT
+);

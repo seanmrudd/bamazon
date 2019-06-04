@@ -92,7 +92,7 @@ function viewLowInventory() {
 function addInventory() {
     connection.query('SELECT * FROM products', function (err, res) {
         if (err) throw err;
-        console.log(`${chalk.blue(tableHeader)}`);
+        console.log(`\n${chalk.blue(tableHeader)}`);
         for (let i = 0; i < res.length; i++) {
             var idFixed = res[i].item_id;
             var productNameFixed = res[i].product_name;
