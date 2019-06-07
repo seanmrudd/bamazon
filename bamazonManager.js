@@ -125,7 +125,7 @@ function addInventory() {
             var amount = answers.amount;
             var amount2 = parseInt(amount);
 
-            connection.query('SELECT * FROM products WHERE `item_id` = ' + item2, function (err, res) {
+            connection.query('SELECT * FROM products WHERE `item_id` = ?', item2, function (err, res) {
                 if (err) throw err;
 
                 // console.log(`Item id: ${item2} \nAmount purchased: ${amount2}`)
