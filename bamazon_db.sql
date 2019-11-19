@@ -8,7 +8,7 @@ CREATE TABLE products (
 	item_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(100),
     department_name VARCHAR(100),
-    price DECIMAL(5,2),
+    price DECIMAL(6,2),
     stock_quantity INT
 );
 
@@ -32,8 +32,4 @@ INSERT INTO products(product_name, department_name, price, stock_quantity) VALUE
 
 INSERT INTO products(product_name, department_name, price, stock_quantity) VALUES ('Holy Grail', 'Divine Item', 999.99, 99);
 
-CREATE TABLE departments (
-	department_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    department_name VARCHAR(100),
-    over_head_costs INT
-);
+INSERT INTO products(product_name, department_name, price, stock_quantity) VALUES ('Super Duper Awesome Amazing Thing-a-ma-Bob', 'Miscellaneous', 1318.54, 55);
